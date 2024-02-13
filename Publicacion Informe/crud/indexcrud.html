@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios de Hosting para Express.js</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html">Informe de express.js</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Temas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../Entorno_Configuracion/index.html">Entorno y Configuracion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Hosting/index.html">Hosting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Correo/CorreoInfo.html">Envio de Correo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../PDF/pdf.html">Crear PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Descarga_Archivos/index.html">Descarga de Achivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Encriptacion/index.html">Encriptacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Menus/indeex.html">Menus</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Almacen_Imagenes/index.html">Imagenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../debugs/index.html">Debug</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Parametos/index.html">Parametos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Responsividad/index.html">Resposividad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../jquery-ajax/index.html">Jquery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../sweet alert/index.html">Sweet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../crud/indexcrud.html">Crud</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Publicacion/index.html">Publicacion</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Navegadores
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Navegadores/indexWeb.html">Web</a></li>
+                                <li><a class="dropdown-item" href="/Navegadores/indexMov.html">Moviles</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/exepciones/index.html">Manejo de Exepciones</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+              <h1>CRUD en Express.js</h1>
+            </div>
+            <div class="card-body">
+              <p>
+                El CRUD es un conjunto de operaciones básicas utilizadas en las aplicaciones web para gestionar los datos almacenados en una base de datos o en cualquier otro tipo de almacenamiento. En Express.js, puedes implementar estas operaciones utilizando rutas y controladores dedicados para cada acción. Por ejemplo, puedes definir una ruta POST para crear nuevos registros, una ruta GET para leer datos existentes, una ruta PUT para actualizar registros y una ruta DELETE para eliminar registros. Al organizar tu código de esta manera, puedes mantener una estructura clara y modular en tu aplicación, lo que facilita su mantenimiento y escalabilidad.
+              </p>
+              <h5>Ejemplo de Crud en Express Js:</h5>
+              <div class="card">
+                <div class="card-body">
+                  <pre><code>
+                    const express = require('express');
+                    const bodyParser = require('body-parser');
+                    
+                    const app = express();
+                    app.use(bodyParser.json());
+                    
+                    // Base de datos simulada (arreglo)
+                    let productos = [];
+                    
+                    // Ruta para crear un nuevo producto
+                    app.post('/productos', (req, res) => {
+                      const nuevoProducto = req.body;
+                      productos.push(nuevoProducto);
+                      res.status(201).json({ mensaje: 'Producto creado exitosamente' });
+                    });
+                    
+                    // Ruta para obtener todos los productos
+                    app.get('/productos', (req, res) => {
+                      res.json(productos);
+                    });
+                    
+                    // Ruta para actualizar un producto existente
+                    app.put('/productos/:id', (req, res) => {
+                      const { id } = req.params;
+                      const actualizacionProducto = req.body;
+                      productos = productos.map(producto => {
+                        if (producto.id === id) {
+                          return { ...producto, ...actualizacionProducto };
+                        }
+                        return producto;
+                      });
+                      res.json({ mensaje: 'Producto actualizado exitosamente' });
+                    });
+                    
+                    // Ruta para eliminar un producto existente
+                    app.delete('/productos/:id', (req, res) => {
+                      const { id } = req.params;
+                      productos = productos.filter(producto => producto.id !== id);
+                      res.json({ mensaje: 'Producto eliminado exitosamente' });
+                    });
+                    
+                    // Iniciando el servidor
+                    app.listen(3000, () => {
+                      console.log('Servidor iniciado en http://localhost:3000');
+                    });
+                    
+                  </code></pre>
+                </div>
+          </div>
+        </div>
+      
+        <!-- Bootstrap JavaScript y dependencias opcionales -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
